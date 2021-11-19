@@ -1,7 +1,7 @@
 import React from "react";
 import { Carousel, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Canon from "../../Assets/Images/Carousel/olmpus.jpg";
+import Canon from "../../Assets/Images/Carousel/canon.jpg";
 import Nikon from "../../Assets/Images/Carousel/nikon1.jpg";
 import Sony from "../../Assets/Images/Carousel/sony.jpg";
 import Sony1 from "../../Assets/Images/Carousel/sony2.jpg";
