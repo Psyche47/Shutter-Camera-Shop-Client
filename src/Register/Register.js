@@ -12,7 +12,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { ImUserTie } from "react-icons/im";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import useAuth from "../../Hooks/useAuth";
+import useAuth from "../../src/Hooks/useAuth";
 
 const SignUp = () => {
   const history = useHistory();
