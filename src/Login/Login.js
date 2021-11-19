@@ -4,10 +4,10 @@ import { NavLink, useLocation, useHistory } from "react-router-dom";
 import useAuth from "../../src/Hooks/useAuth";
 import { MdEmail } from "react-icons/md";
 import { FaLock } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const Login = () => {
-  const { signInWithEmail, getPassword, getEmail, setError, setUser, error } =
-    useAuth();
+  const { signInWithEmail, getPassword, getEmail, setUser } = useAuth();
 
   const location = useLocation();
   const history = useHistory();
@@ -19,11 +19,25 @@ const Login = () => {
     signInWithEmail()
       .then((result) => {
         setUser(result.user);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Successfully Logged in!",
+          text: "Take A Look At Our Products.",
+          showConfirmButton: false,
+          timer: 2000,
+        });
         history.push(redirect_uri);
       })
       .catch((err) => {
-        const errorMessage = "Invalid Email or Password, please try again.";
-        setError(errorMessage);
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Login Error",
+          text: "Incorrect Email or Password, Please try again",
+          showConfirmButton: false,
+          timer: 2000,
+        });
       })
       .finally(() => {
         setIsLoading(false);
@@ -33,7 +47,6 @@ const Login = () => {
     <div className="text-center my-4 mb-5">
       <h2>Please Login</h2>
       <p className=" mt-2">Login with Email & Password</p>
-      <p className="text-danger text-center">{error}</p>
       <div className="w-25 mx-auto">
         <Form onSubmit={handleEmailLogin}>
           <Row>
