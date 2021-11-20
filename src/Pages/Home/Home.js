@@ -4,7 +4,7 @@ import useProducts from "../../Hooks/useProducts";
 import Product from "../Product/Product";
 import Banner from "../Banner/Banner";
 import FAQ from "../FAQ/FAQ";
-
+import Footer from "../../Shared/Footer";
 const Home = () => {
   const [products] = useProducts();
   return (
@@ -23,6 +23,7 @@ const Home = () => {
         </div>
       </Container>
       <FAQ></FAQ>
+      <Footer></Footer>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 import useProducts from "../../Hooks/useProducts";
+import Footer from "../../Shared/Footer";
 import Product from "../Product/Product";
 
 const Products = () => {
@@ -19,6 +20,7 @@ const Products = () => {
           </div>
         </div>
       </Container>
+      <Footer></Footer>
     </div>
   );
 };

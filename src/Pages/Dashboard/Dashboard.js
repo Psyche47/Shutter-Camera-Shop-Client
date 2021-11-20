@@ -7,6 +7,7 @@ import ManageAllProducts from "../ManageAllProducts/ManageAllProducts";
 import Pay from "../Pay/Pay";
 import useAuth from "../../Hooks/useAuth";
 import MakeAdmin from "../MakeAdmin/MakeAdmin";
+import PostReview from "../../PostReview/PostReview";
 
 const Admin = () => {
   const [render, setRender] = useState("addProducts");
@@ -69,6 +70,16 @@ const Admin = () => {
                   </Button>
                 </ListGroup.Item>
               )}
+              {!admin && (
+                <ListGroup.Item variant="dark" as="li" className="admin-item">
+                  <Button
+                    variant="success"
+                    onClick={() => setRender("feedBack")}
+                  >
+                    Leave A Review
+                  </Button>
+                </ListGroup.Item>
+              )}
 
               {admin && (
                 <ListGroup.Item variant="dark" as="li" className="admin-item">
@@ -103,6 +114,7 @@ const Admin = () => {
           )}
           {render === "manageAllOrders" && <ManageAllOrders></ManageAllOrders>}
           {render === "makeAdmin" && <MakeAdmin></MakeAdmin>}
+          {render === "feedBack" && <PostReview></PostReview>}
         </Col>
       </Row>
     </div>
