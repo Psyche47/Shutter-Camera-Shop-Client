@@ -15,6 +15,7 @@ import { AiOutlineStar as Star } from "react-icons/ai";
 import { GrLocation as Destination, GrMapLocation } from "react-icons/gr";
 import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Bookings = () => {
   const { user } = useAuth();
@@ -54,7 +55,14 @@ const Bookings = () => {
       .then((res) => res.json())
       .then((res) => {
         if (res.insertedId) {
-          alert("Service booked successfully.");
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Product Order Successful.",
+            text: "Please wait for confirmation email",
+            showConfirmButton: false,
+            timer: 2000,
+          });
           history.push(redirect_uri);
         }
       });

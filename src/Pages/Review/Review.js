@@ -7,7 +7,7 @@ const Review = ({ review }) => {
   const { name, rating, description } = review;
 
   return (
-    <div className="col-lg-4 col-md-6 col-sm-12">
+    <div className="col-lg-3 col-md-6 col-sm-12">
       <Card style={{ width: "18rem" }} className="mt-3 g-2 mx-auto">
         <Card.Header>
           <User className="me-1" size="1.5em" />

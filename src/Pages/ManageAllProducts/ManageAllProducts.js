@@ -20,7 +20,7 @@ const ManageAllServices = () => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/deleteOrder/${id}`, {
+        fetch(`http://localhost:5000/deleteProduct/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
