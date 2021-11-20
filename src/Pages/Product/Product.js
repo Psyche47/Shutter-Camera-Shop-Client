@@ -1,10 +1,14 @@
 import React from "react";
 import { Card, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { MdMoney as Price, MdOutlineReviews as Review } from "react-icons/md";
+import {
+  MdMoney as Price,
+  MdOutlineReviews as Review,
+  MdPrecisionManufacturing as Manufacturer,
+} from "react-icons/md";
 import { AiOutlineStar as Star } from "react-icons/ai";
 import { BsBookmarkCheck as Check } from "react-icons/bs";
-import { GrLocation as Destination, GrMapLocation } from "react-icons/gr";
+import { FaCameraRetro as Camera } from "react-icons/fa";
 
 const Product = ({ product }) => {
   const {
@@ -32,14 +36,14 @@ const Product = ({ product }) => {
         />
         <Card.Body>
           <Card.Title>
-            <Destination className="me-1" size="1.5em"></Destination>
+            <Camera className="me-1" size="1.5em" />
             {productName}
           </Card.Title>
         </Card.Body>
         <ListGroup className="list-group-flush">
           <ListGroupItem>
             {" "}
-            <GrMapLocation className="me-1" size="1.5em" />
+            <Manufacturer className="me-1" size="1.5em" />
             {manufacturer}
           </ListGroupItem>
           <ListGroupItem>
@@ -47,7 +51,7 @@ const Product = ({ product }) => {
           </ListGroupItem>
           <ListGroupItem>
             <Star className="me-1" size="1.5em" />
-            {rating}/5.0
+            {rating} / 5
           </ListGroupItem>
           <ListGroupItem>
             <Review className="me-1" size="1.5em" />

@@ -5,6 +5,7 @@ import Product from "../Product/Product";
 import Banner from "../Banner/Banner";
 import FAQ from "../FAQ/FAQ";
 import Footer from "../../Shared/Footer";
+import Reviews from "../Reviews/Reviews";
 const Home = () => {
   const [products] = useProducts();
   return (
@@ -22,6 +23,7 @@ const Home = () => {
           </div>
         </div>
       </Container>
+      <Reviews></Reviews>
       <FAQ></FAQ>
       <Footer></Footer>
     </div>
