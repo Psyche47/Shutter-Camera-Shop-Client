@@ -27,42 +27,58 @@ const Admin = () => {
           <Container>
             <h4 className="text-center text-light">Menu</h4>
             <ListGroup as="ol" numbered>
-              <ListGroup.Item variant="dark" as="li" className="admin-item">
-                <Button variant="success" onClick={() => setRender("pay")}>
-                  {" "}
-                  Pay
-                </Button>
-              </ListGroup.Item>
-              <ListGroup.Item variant="dark" as="li" className="admin-item">
-                <Button
-                  variant="success"
-                  onClick={() => setRender("addProducts")}
-                >
-                  {" "}
-                  Add A Product
-                </Button>
-              </ListGroup.Item>
-              <ListGroup.Item variant="dark" as="li" className="admin-item">
-                <Button
-                  variant="success"
-                  onClick={() => setRender("manageProducts")}
-                >
-                  Manage Products
-                </Button>
-              </ListGroup.Item>
-              <ListGroup.Item variant="dark" as="li" className="admin-item">
-                <Button variant="success" onClick={() => setRender("myOrders")}>
-                  View Your Orders
-                </Button>
-              </ListGroup.Item>
-              <ListGroup.Item variant="dark" as="li" className="admin-item">
-                <Button
-                  variant="success"
-                  onClick={() => setRender("manageAllOrders")}
-                >
-                  Manage All Orders
-                </Button>
-              </ListGroup.Item>
+              {!admin && (
+                <ListGroup.Item variant="dark" as="li" className="admin-item">
+                  <Button variant="success" onClick={() => setRender("pay")}>
+                    {" "}
+                    Pay
+                  </Button>
+                </ListGroup.Item>
+              )}
+              {admin && (
+                <ListGroup.Item variant="dark" as="li" className="admin-item">
+                  <Button
+                    variant="success"
+                    onClick={() => setRender("addProducts")}
+                  >
+                    {" "}
+                    Add A Product
+                  </Button>
+                </ListGroup.Item>
+              )}
+
+              {admin && (
+                <ListGroup.Item variant="dark" as="li" className="admin-item">
+                  <Button
+                    variant="success"
+                    onClick={() => setRender("manageProducts")}
+                  >
+                    Manage Products
+                  </Button>
+                </ListGroup.Item>
+              )}
+
+              {!admin && (
+                <ListGroup.Item variant="dark" as="li" className="admin-item">
+                  <Button
+                    variant="success"
+                    onClick={() => setRender("myOrders")}
+                  >
+                    View Your Orders
+                  </Button>
+                </ListGroup.Item>
+              )}
+
+              {admin && (
+                <ListGroup.Item variant="dark" as="li" className="admin-item">
+                  <Button
+                    variant="success"
+                    onClick={() => setRender("manageAllOrders")}
+                  >
+                    Manage All Orders
+                  </Button>
+                </ListGroup.Item>
+              )}
             </ListGroup>
           </Container>
         </Col>
