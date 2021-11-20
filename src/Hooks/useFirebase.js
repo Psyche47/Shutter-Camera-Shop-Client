@@ -38,6 +38,17 @@ const useFirebase = () => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  // //Adding user to DB
+  // function addUserToDB(name, email) {
+  //   fetch("http://localhost:5000/addUser", {
+  //     method: "POST",
+  //     headers: { "content-type": "application/json" },
+  //     body: JSON.stringify({ name, email }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {});
+  // }
+
   // sign out
   const logOut = () => {
     setIsLoading(true);
@@ -109,6 +120,8 @@ const useFirebase = () => {
     signUpWithEmail,
     signInWithEmail,
     getName,
+    name,
+    email,
     isLoading,
   };
 };

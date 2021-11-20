@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import { Col, Form, FormControl, InputGroup, Row } from "react-bootstrap";
 import { NavLink, useLocation, useHistory } from "react-router-dom";
-import useAuth from "../../src/Hooks/useAuth";
+import useAuth from "../../Hooks/useAuth";
 import { MdEmail } from "react-icons/md";
 import { FaLock } from "react-icons/fa";
 import Swal from "sweetalert2";

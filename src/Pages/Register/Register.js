@@ -7,12 +7,13 @@ import {
   InputGroup,
   Row,
 } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 import { NavLink, useHistory } from "react-router-dom";
 import { ImUserTie } from "react-icons/im";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
-import useAuth from "../../src/Hooks/useAuth";
+import useAuth from "../../Hooks/useAuth";
 
 const SignUp = () => {
   const history = useHistory();
@@ -37,13 +38,27 @@ const SignUp = () => {
             e.preventDefault();
             signUpWithEmail()
               .then((result) => {
-                alert("User has been Created!");
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "User Created Successfully.",
+                  text: "Take A Look At Our Products.",
+                  showConfirmButton: false,
+                  timer: 2000,
+                });
                 history.push("/home");
                 setUserName();
               })
               .catch((err) => {
                 const errorMessage = err.message;
-                setError(errorMessage);
+                Swal.fire({
+                  position: "center",
+                  icon: "error",
+                  title: "Registration Error",
+                  text: errorMessage,
+                  showConfirmButton: false,
+                  timer: 2000,
+                });
               });
           }}
         >

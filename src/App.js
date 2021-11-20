@@ -1,11 +1,16 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "../src/Assets/CSS/custom.css";
-import ExploreProducts from "./ExploreProducts/ExploreProducts";
-import Register from "./Register/Register";
+import ExploreProducts from "./Pages/ExploreProducts/ExploreProducts";
+import Register from "./Pages/Register/Register";
 import Home from "./Pages/Home/Home";
 import Header from "./Shared/Header";
 import AuthProvider from "./Context/AuthProvider";
-import Login from "./Login/Login";
+import NotFound from "./Pages/NotFound/NotFound";
+import AddProducts from "./Pages/AddProducts/AddProducts";
+import Products from "./Pages/Products/Products";
+import ConfirmOrders from "./Pages/ConfirmOrders/ConfirmOrders";
+import Login from "./Pages/Login/Login";
+import MyOrders from "./Pages/MyOrders/MyOrders";
 
 function App() {
   return (
@@ -28,6 +33,21 @@ function App() {
             </Route>
             <Route path="/login">
               <Login></Login>
+            </Route>
+            <Route path="/addProducts">
+              <AddProducts></AddProducts>
+            </Route>
+            <Route path="/allProducts">
+              <Products></Products>
+            </Route>
+            <Route path="/orders/:id">
+              <ConfirmOrders></ConfirmOrders>
+            </Route>
+            <Route path="/myOrders">
+              <MyOrders></MyOrders>
+            </Route>
+            <Route path="*">
+              <NotFound></NotFound>
             </Route>
           </Switch>
         </Router>

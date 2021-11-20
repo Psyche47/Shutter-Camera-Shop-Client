@@ -1,14 +1,14 @@
 import React from "react";
 import { Container, Nav, Navbar, Button } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
-//import useAuth from "../Hooks/useAuth";
+import useAuth from "../Hooks/useAuth";
 
 const Header = () => {
   const activeStyle = {
     color: "white",
     textDecoration: "none",
   };
-  //const { user, logOut } = useAuth();
+  const { user, logOut } = useAuth();
   return (
     <>
       <Navbar
@@ -36,15 +36,13 @@ const Header = () => {
             <Nav.Link style={activeStyle} as={Link} to="/home">
               Home
             </Nav.Link>
-            <Nav.Link style={activeStyle} as={Link} to="/explore">
+            <Nav.Link style={activeStyle} as={Link} to="/allProducts">
               Explore Products
             </Nav.Link>
-            {/* {user?.email ? (
+            {user?.email ? (
               <>
                 <Navbar.Text>
-                  <span style={activeStyle}>
-                    Signed in as: {user?.displayName}
-                  </span>
+                  <span style={activeStyle}>Hey, {user?.displayName}</span>
                   <Button variant="light" onClick={logOut} className="ms-3">
                     Log Out
                   </Button>
@@ -59,7 +57,7 @@ const Header = () => {
               <Nav.Link style={activeStyle} as={Link} to="/login">
                 Login
               </Nav.Link>
-            )} */}
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>
