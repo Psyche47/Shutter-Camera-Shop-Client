@@ -1,18 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Container, ListGroup, Row } from "react-bootstrap";
 import AddProducts from "../AddProducts/AddProducts";
 import ManageAllOrders from "../ManageAllOrders/ManageAllOrders";
 import MyOrders from "../MyOrders/MyOrders";
 import ManageAllProducts from "../ManageAllProducts/ManageAllProducts";
 import Pay from "../Pay/Pay";
+import useAuth from "../../Hooks/useAuth";
 
 const Admin = () => {
   const [render, setRender] = useState("addProducts");
+  const { admin } = useAuth();
+
   return (
     <div>
-      <h2 className="text-info text-center mt-1 bg-dark rounded mx-2 p-2">
-        Dashboard
-      </h2>
+      {admin ? (
+        <h2 className="text-info text-center mt-1 bg-dark rounded mx-2 p-2">
+          Admin Dashboard
+        </h2>
+      ) : (
+        <h2 className="text-info text-center mt-1 bg-dark rounded mx-2 p-2">
+          User Dashboard
+        </h2>
+      )}
       <Row className="mx-2 border rounded ">
         <Col className="border border-dark p-1 bg-dark" lg={3} md={3} sm={12}>
           <Container>
