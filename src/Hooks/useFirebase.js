@@ -54,11 +54,26 @@ const useFirebase = () => {
   const logOut = () => {
     setIsLoading(true);
     signOut(auth)
-      .then((result) => {
+      .then(() => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Successfully Logged out.",
+          text: "Hope to see you soon!",
+          showConfirmButton: false,
+          timer: 2000,
+        });
         setUser({});
       })
       .catch((err) => {
-        setError(err.message);
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "An Error Occurred",
+          text: `${err.message}`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
       })
       .finally(() => {
         setIsLoading(false);
