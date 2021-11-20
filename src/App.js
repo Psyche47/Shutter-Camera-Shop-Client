@@ -14,6 +14,7 @@ import MyOrders from "./Pages/MyOrders/MyOrders";
 import PrivateRoute from "./Pages/PrivateRoute/PrivateRoute";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import ManageAllOrders from "./Pages/ManageAllOrders/ManageAllOrders";
+import Footer from "./Shared/Footer";
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
               <NotFound></NotFound>
             </Route>
           </Switch>
+          <Footer />
         </Router>
       </AuthProvider>
     </div>
