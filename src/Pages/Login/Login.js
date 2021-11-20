@@ -1,105 +1,69 @@
-import { React, useState } from "react";
-import { Col, Form, FormControl, InputGroup, Row } from "react-bootstrap";
-import { NavLink, useLocation, useHistory } from "react-router-dom";
+import React from "react";
+import { Container, Form } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
-import { MdEmail } from "react-icons/md";
-import { FaLock } from "react-icons/fa";
-import Swal from "sweetalert2";
 
 const Login = () => {
-  const { signInWithEmail, getPassword, getEmail, setUser } = useAuth();
-
-  const location = useLocation();
+  const { signInWithEmail, isLoading } = useAuth();
   const history = useHistory();
-  const redirect_uri = location.state?.from || "/home";
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleEmailLogin = (e) => {
-    e.preventDefault();
-    signInWithEmail()
-      .then((result) => {
-        setUser(result.user);
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Successfully Logged in!",
-          text: "Take A Look At Our Products.",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        history.push(redirect_uri);
-      })
-      .catch((err) => {
-        Swal.fire({
-          position: "center",
-          icon: "error",
-          title: "Login Error",
-          text: "Incorrect Email or Password, Please try again",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+  const location = useLocation();
+  const redirect = location?.state?.from || "/home";
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    signInWithEmail({ ...data, history, redirect });
   };
   return (
-    <div className="text-center my-4 mb-5">
-      <h2>Please Login</h2>
-      <p className=" mt-2">Login with Email & Password</p>
-      <div className="w-25 mx-auto">
-        <Form onSubmit={handleEmailLogin}>
-          <Row>
-            <Col className="text-start">
-              <Form.Label htmlFor="email" visuallyHidden>
-                Your Email Address
-              </Form.Label>
-              <InputGroup className="mb-2">
-                <InputGroup.Text>
-                  <MdEmail size="1.5em" />
-                </InputGroup.Text>
-                <FormControl
-                  onBlur={getEmail}
-                  type="email"
-                  autoComplete="current-email"
-                  id="email"
-                  placeholder="Enter your email address"
-                  required
-                />
-              </InputGroup>
-            </Col>
-          </Row>
-          <Row className="mt-2">
-            <Col className="text-start">
-              <Form.Label htmlFor="password" visuallyHidden>
-                Your Password
-              </Form.Label>
-              <InputGroup className="mb-2">
-                <InputGroup.Text>
-                  <FaLock size="1.5em" />
-                </InputGroup.Text>
-                <FormControl
-                  onBlur={getPassword}
-                  type="password"
-                  autoComplete="current-password"
-                  id="password"
-                  placeholder="Enter your password"
-                  required
-                />
-              </InputGroup>
-            </Col>
-          </Row>
+    <div>
+      <Container>
+        <Form
+          onSubmit={handleSubmit(onSubmit)}
+          className="border border-dark rounded mt-5 w-50 p-3 mx-auto"
+        >
+          <h5 className="text-center text-info bg-dark rounded p-2 w-50 mx-auto">
+            Please Log In
+          </h5>
+          <Form.Group className="mb-3 w-50 mx-auto">
+            <Form.Control
+              type="email"
+              {...register("email", { required: true })}
+              placeholder="Enter your email"
+            />
+            <Form.Text className="text-muted">
+              {errors.manufacturer && (
+                <h5 className="text-danger mt-1">Email is required</h5>
+              )}
+            </Form.Text>
+          </Form.Group>
+          <Form.Group className="mb-3 w-50 mx-auto">
+            <Form.Control
+              type="password"
+              {...register("password", { required: true })}
+              placeholder="Enter your password"
+            />
+            <Form.Text className="text-muted">
+              {errors.price && (
+                <h5 className="text-danger mt-1">Password is required</h5>
+              )}
+            </Form.Text>
+          </Form.Group>
 
-          <button type="submit" className="btn btn-primary mt-2 w-100">
-            Login
-          </button>
+          <div className="text-center">
+            <Form.Group className="mt-2 w-50 mx-auto ">
+              <input type="submit" className="btn btn-primary" value="Login" />
+            </Form.Group>
+          </div>
         </Form>
-      </div>
-      <p className="mt-2">
-        <NavLink className="text-decoration-none" to="/register">
-          Need an Account? Please Sign up!
-        </NavLink>
-      </p>
+        <p className="mt-2 text-center">
+          <NavLink className="text-decoration-none" to="/register">
+            Need an account? Please Register!
+          </NavLink>
+        </p>
+      </Container>
     </div>
   );
 };

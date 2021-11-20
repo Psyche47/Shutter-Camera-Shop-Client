@@ -1,17 +1,20 @@
 import React from "react";
 import { Container, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
 import { NavLink, useHistory } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 
-const AddServices = () => {
+const Register = () => {
+  const { signUpWithEmail, isLoading } = useAuth();
+  const history = useHistory();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {};
+  const onSubmit = (data) => {
+    signUpWithEmail(data, history);
+  };
   return (
     <div>
       <Container>
@@ -81,4 +84,4 @@ const AddServices = () => {
   );
 };
 
-export default AddServices;
+export default Register;

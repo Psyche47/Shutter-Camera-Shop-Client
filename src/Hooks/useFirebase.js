@@ -9,6 +9,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import Swal from "sweetalert2";
 
 initializeAuthentication();
 
@@ -17,26 +18,37 @@ const auth = getAuth();
 const useFirebase = () => {
   const [user, setUser] = useState({});
   const [error, setError] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   //signInWithEmailAndPassword
-  const signInWithEmail = (e) => {
-    return signInWithEmailAndPassword(auth, email, password);
-  };
-
-  // //Adding user to DB
-  // function addUserToDB(name, email) {
-  //   fetch("http://localhost:5000/addUser", {
-  //     method: "POST",
-  //     headers: { "content-type": "application/json" },
-  //     body: JSON.stringify({ name, email }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {});
-  // }
+  function signInWithEmail({ email, password, history, redirect }) {
+    setIsLoading(true);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Successfully Logged in!!",
+          text: "Please Take A Look At Our Products!",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        setUser(result.user);
+        history.replace(redirect);
+      })
+      .catch((err) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "An Error Occurred",
+          text: `${err.message}`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      })
+      .finally(() => setIsLoading(false));
+  }
 
   // sign out
   const logOut = () => {
@@ -64,37 +76,58 @@ const useFirebase = () => {
     return () => unsubscribe;
   }, [user]);
 
-  // get name
-  const getName = (e) => {
-    setName(e?.target?.value);
-  };
-  // get email
-  const getEmail = (e) => {
-    setEmail(e?.target?.value);
+  // Register
+  const signUpWithEmail = (newUserData, history) => {
+    const { name, email, password } = newUserData;
+    const role = "user";
+    setIsLoading(true);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        setUserName(name);
+        addUserToDB(name, email, role);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Successfully Registered",
+          text: "Please take a look at our products!",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        setUser(result.user);
+        history.push("/home");
+      })
+      .catch((err) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "An Error Occurred, please try again.",
+          text: `${err.message}`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      })
+      .finally(() => setIsLoading(false));
   };
 
-  // get password
-  const getPassword = (e) => {
-    if (/^(?=.*[A-Z]).{6}/.test(e.target.value)) {
-      setPassword(e?.target?.value);
-    } else {
-      setError(
-        "Password must have one upper case letter and be of 6 characters long"
-      );
-    }
-  };
-
-  // signUp
-  const signUpWithEmail = () => {
-    return createUserWithEmailAndPassword(auth, email, password);
-  };
+  // Adding User To Database
+  function addUserToDB(name, email, role) {
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ name, email, role }),
+    })
+      .then((res) => res.json())
+      .then((data) => {});
+  }
 
   // update name and email
-  const setUserName = () => {
+  function setUserName(name) {
     updateProfile(auth.currentUser, {
       displayName: name,
-    }).then((result) => {});
-  };
+    })
+      .then(() => {})
+      .catch((error) => {});
+  }
 
   return {
     setUserName,
@@ -104,13 +137,8 @@ const useFirebase = () => {
     auth,
     setError,
     logOut,
-    getEmail,
-    getPassword,
     signUpWithEmail,
     signInWithEmail,
-    getName,
-    name,
-    email,
     isLoading,
   };
 };
