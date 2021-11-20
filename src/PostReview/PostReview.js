@@ -1,13 +1,11 @@
-import React, { useState } from "react";
-import { Form, Row, Col } from "react-bootstrap";
+import React from "react";
+import { Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import Rating from "react-rating";
 import Swal from "sweetalert2";
 import useAuth from "../Hooks/useAuth";
 
 const PostReview = () => {
   const { user } = useAuth();
-  const [rating, setRating] = useState(5);
   const {
     register,
     reset,
@@ -15,6 +13,7 @@ const PostReview = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
+    data.email = user?.email;
     fetch("http://localhost:5000/addReview", {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -48,7 +47,7 @@ const PostReview = () => {
           <Form.Label style={{ fontWeight: "bold" }}>Your Name </Form.Label>
           <Form.Control
             type="text"
-            {...register("productName", { required: true })}
+            {...register("name", { required: true })}
             defaultValue={user?.displayName}
           />
           <Form.Text className="text-muted">
