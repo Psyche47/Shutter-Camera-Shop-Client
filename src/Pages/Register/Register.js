@@ -1,140 +1,84 @@
 import React from "react";
-import {
-  Button,
-  Col,
-  Form,
-  FormControl,
-  InputGroup,
-  Row,
-} from "react-bootstrap";
+import { Container, Form } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-
 import { NavLink, useHistory } from "react-router-dom";
-import { ImUserTie } from "react-icons/im";
-import { MdEmail } from "react-icons/md";
-import { RiLockPasswordFill } from "react-icons/ri";
 import useAuth from "../../Hooks/useAuth";
 
-const SignUp = () => {
-  const history = useHistory();
+const AddServices = () => {
   const {
-    getEmail,
-    getPassword,
-    signUpWithEmail,
-    getName,
-    setError,
-    setUserName,
-    error,
-  } = useAuth();
-
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {};
   return (
-    <div className="text-center my-4">
-      <h2>Please Sign Up</h2>
-      <p className=" mt-2">Sign Up with Email & Password</p>
-      <h4 className="text-danger text-center">{error}</h4>
-      <div className="w-25 mx-auto">
+    <div>
+      <Container>
         <Form
-          onSubmit={(e) => {
-            e.preventDefault();
-            signUpWithEmail()
-              .then((result) => {
-                Swal.fire({
-                  position: "center",
-                  icon: "success",
-                  title: "User Created Successfully.",
-                  text: "Take A Look At Our Products.",
-                  showConfirmButton: false,
-                  timer: 2000,
-                });
-                history.push("/home");
-                setUserName();
-              })
-              .catch((err) => {
-                const errorMessage = err.message;
-                Swal.fire({
-                  position: "center",
-                  icon: "error",
-                  title: "Registration Error",
-                  text: errorMessage,
-                  showConfirmButton: false,
-                  timer: 2000,
-                });
-              });
-          }}
+          onSubmit={handleSubmit(onSubmit)}
+          className="border border-dark rounded mt-5 w-50 p-3 mx-auto"
         >
-          <Row>
-            <Col className="text-start">
-              <Form.Label htmlFor="name" visuallyHidden>
-                Your Name
-              </Form.Label>
-              <InputGroup className="mb-2">
-                <InputGroup.Text>
-                  <ImUserTie size="1.5em" />
-                </InputGroup.Text>
-                <FormControl
-                  onBlur={getName}
-                  type="text"
-                  autoComplete="current-text"
-                  id="name"
-                  placeholder="Enter your name"
-                  required
-                />
-              </InputGroup>
-            </Col>
-          </Row>
+          <h5 className="text-center text-info bg-dark rounded p-2 w-50 mx-auto">
+            Please Sign Up
+          </h5>
 
-          <Row>
-            <Col className="text-start">
-              <Form.Label htmlFor="email" visuallyHidden>
-                Your Email Address
-              </Form.Label>
-              <InputGroup className="mb-2">
-                <InputGroup.Text>
-                  <MdEmail size="1.5em" />
-                </InputGroup.Text>
-                <FormControl
-                  onBlur={getEmail}
-                  type="email"
-                  autoComplete="current-email"
-                  id="email"
-                  placeholder="Enter your email address"
-                />
-              </InputGroup>
-            </Col>
-          </Row>
+          <Form.Group className="mb-3 w-50 mx-auto">
+            <Form.Control
+              type="text"
+              {...register("name", { required: true })}
+              placeholder="Enter your name"
+            />
+            <Form.Text className="text-muted">
+              {errors.productName && (
+                <h5 className="text-danger mt-1">Name is required</h5>
+              )}
+            </Form.Text>
+          </Form.Group>
 
-          <Row className="mt-2">
-            <Col className="text-start">
-              <Form.Label htmlFor="password" visuallyHidden>
-                Your Password
-              </Form.Label>
-              <InputGroup className="mb-2">
-                <InputGroup.Text>
-                  <RiLockPasswordFill size="1.5em" />
-                </InputGroup.Text>
-                <FormControl
-                  onBlur={getPassword}
-                  type="password"
-                  autoComplete="current-password"
-                  id="password"
-                  placeholder="Enter your password"
-                />
-              </InputGroup>
-            </Col>
-          </Row>
+          <Form.Group className="mb-3 w-50 mx-auto">
+            <Form.Control
+              type="email"
+              {...register("email", { required: true })}
+              placeholder="Enter your email"
+            />
+            <Form.Text className="text-muted">
+              {errors.manufacturer && (
+                <h5 className="text-danger mt-1">Email is required</h5>
+              )}
+            </Form.Text>
+          </Form.Group>
+          <Form.Group className="mb-3 w-50 mx-auto">
+            <Form.Control
+              type="password"
+              {...register("password", { required: true })}
+              placeholder="Enter your password"
+            />
+            <Form.Text className="text-muted">
+              {errors.price && (
+                <h5 className="text-danger mt-1">Password is required</h5>
+              )}
+            </Form.Text>
+          </Form.Group>
 
-          <Button type="submit" className="w-100 mt-3">
-            Register
-          </Button>
+          <div className="text-center">
+            <Form.Group className="mt-2 w-50 mx-auto ">
+              <input
+                type="submit"
+                className="btn btn-success"
+                value="Register"
+              />
+            </Form.Group>
+          </div>
         </Form>
-      </div>
-      <p className="mt-2">
-        <NavLink className="text-decoration-none" to="/login">
-          Already have an account? Please login!
-        </NavLink>
-      </p>
+        <p className="mt-2 text-center">
+          <NavLink className="text-decoration-none" to="/login">
+            Already have an account? Please login!
+          </NavLink>
+        </p>
+      </Container>
     </div>
   );
 };
 
-export default SignUp;
+export default AddServices;

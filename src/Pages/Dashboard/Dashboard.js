@@ -3,6 +3,8 @@ import { Button, Col, Container, ListGroup, Row } from "react-bootstrap";
 import AddProducts from "../AddProducts/AddProducts";
 import ManageAllOrders from "../ManageAllOrders/ManageAllOrders";
 import MyOrders from "../MyOrders/MyOrders";
+import ManageAllProducts from "../ManageAllProducts/ManageAllProducts";
+import Pay from "../Pay/Pay";
 
 const Admin = () => {
   const [render, setRender] = useState("addProducts");
@@ -17,6 +19,12 @@ const Admin = () => {
             <h4 className="text-center text-light">Menu</h4>
             <ListGroup as="ol" numbered>
               <ListGroup.Item variant="dark" as="li" className="admin-item">
+                <Button variant="success" onClick={() => setRender("pay")}>
+                  {" "}
+                  Pay
+                </Button>
+              </ListGroup.Item>
+              <ListGroup.Item variant="dark" as="li" className="admin-item">
                 <Button
                   variant="success"
                   onClick={() => setRender("addProducts")}
@@ -28,9 +36,9 @@ const Admin = () => {
               <ListGroup.Item variant="dark" as="li" className="admin-item">
                 <Button
                   variant="success"
-                  onClick={() => setRender("manageOrders")}
+                  onClick={() => setRender("manageProducts")}
                 >
-                  View All Orders
+                  Manage Products
                 </Button>
               </ListGroup.Item>
               <ListGroup.Item variant="dark" as="li" className="admin-item">
@@ -50,11 +58,12 @@ const Admin = () => {
           </Container>
         </Col>
         <Col lg={9} md={9} sm={12}>
+          {render === "pay" && <Pay></Pay>}
           {render === "addProducts" && <AddProducts></AddProducts>}
           {render === "myOrders" && <MyOrders></MyOrders>}
-          {/* {render === "manageServices" && (
-            <ManageAllServices></ManageAllServices>
-          )} */}
+          {render === "manageProducts" && (
+            <ManageAllProducts></ManageAllProducts>
+          )}
           {render === "manageAllOrders" && <ManageAllOrders></ManageAllOrders>}
         </Col>
       </Row>

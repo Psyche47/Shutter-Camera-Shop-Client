@@ -22,17 +22,6 @@ const useFirebase = () => {
   const [name, setName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  const ClearError = () => {
-    setTimeout(() => {
-      setError("");
-    }, 10000);
-  };
-
-  // clear error
-  useEffect(() => {
-    ClearError();
-  }, [error]);
-
   //signInWithEmailAndPassword
   const signInWithEmail = (e) => {
     return signInWithEmailAndPassword(auth, email, password);
