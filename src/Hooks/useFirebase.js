@@ -93,7 +93,7 @@ const useFirebase = () => {
   }, [user]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${user.email}`)
+    fetch(`https://quiet-plateau-54664.herokuapp.com/users/${user.email}`)
       .then((res) => res.json())
       .then((data) => setAdmin(data.admin));
   }, [user.email]);
@@ -133,7 +133,7 @@ const useFirebase = () => {
 
   // Adding User To Database
   function addUserToDB(name, email, role) {
-    fetch("http://localhost:5000/users", {
+    fetch("https://quiet-plateau-54664.herokuapp.com/users", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ name, email, role }),

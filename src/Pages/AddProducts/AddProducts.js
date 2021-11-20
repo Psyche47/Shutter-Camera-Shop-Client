@@ -11,7 +11,7 @@ const AddServices = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    fetch("http://localhost:5000/addProducts", {
+    fetch("https://quiet-plateau-54664.herokuapp.com/addProducts", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),

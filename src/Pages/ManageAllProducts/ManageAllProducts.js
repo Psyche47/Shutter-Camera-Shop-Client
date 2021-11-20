@@ -7,7 +7,7 @@ const ManageAllServices = () => {
   const [control, setControl] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:5000/allProducts")
+    fetch("https://quiet-plateau-54664.herokuapp.com/allProducts")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, [control]);
@@ -20,7 +20,7 @@ const ManageAllServices = () => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/deleteProduct/${id}`, {
+        fetch(`https://quiet-plateau-54664.herokuapp.com/deleteProduct/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

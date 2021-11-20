@@ -8,7 +8,7 @@ const ManageAllOrders = () => {
   const [status, setStatus] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/myOrders/")
+    fetch("https://quiet-plateau-54664.herokuapp.com/myOrders/")
       .then((res) => res.json())
       .then((data) => setBookings(data));
   }, [control]);
@@ -18,7 +18,7 @@ const ManageAllOrders = () => {
   };
 
   const handleUpdate = (id) => {
-    fetch(`http://localhost:5000/updateOrderStatus/${id}`, {
+    fetch(`https://quiet-plateau-54664.herokuapp.com/updateOrderStatus/${id}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ status }),
@@ -34,7 +34,7 @@ const ManageAllOrders = () => {
       confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/deleteOrder/${id}`, {
+        fetch(`https://quiet-plateau-54664.herokuapp.com/deleteOrder/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

@@ -34,7 +34,7 @@ const Bookings = () => {
   } = useForm();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/singleProduct/${id}`)
+    fetch(`https://quiet-plateau-54664.herokuapp.com/singleProduct/${id}`)
       .then((res) => res.json())
       .then((data) => setSingleProduct(data));
   }, []);
@@ -47,7 +47,7 @@ const Bookings = () => {
     data.rating = singleProduct?.rating;
     data.number_of_reviews = singleProduct?.number_of_reviews;
     data.status = "pending";
-    fetch("http://localhost:5000/confirmedOrders", {
+    fetch("https://quiet-plateau-54664.herokuapp.com/confirmedOrders", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),

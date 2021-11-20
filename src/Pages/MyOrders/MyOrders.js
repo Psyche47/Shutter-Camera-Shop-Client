@@ -31,13 +31,13 @@ const MyOrders = () => {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myOrders/${user.email}`)
+    fetch(`https://quiet-plateau-54664.herokuapp.com/myOrders/${user.email}`)
       .then((res) => res.json())
       .then((data) => setOrders(data));
   }, [control]);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/deleteOrder/${id}`, {
+    fetch(`https://quiet-plateau-54664.herokuapp.com/deleteOrder/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
