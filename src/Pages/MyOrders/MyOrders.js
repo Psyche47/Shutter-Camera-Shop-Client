@@ -60,7 +60,7 @@ const MyOrders = () => {
     <div>
       <Container>
         <h4 className="display-5 rounded text-center text-light bg-dark p-3 mt-3">
-          Booked Products
+          Products You Have Ordered
         </h4>
         <div>
           <Row>

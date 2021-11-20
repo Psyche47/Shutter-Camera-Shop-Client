@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Col, Container, ListGroup, Row } from "react-bootstrap";
-import AddServices from "../AddServices/AddServices";
+import AddProducts from "../AddProducts/AddProducts";
+import MyOrders from "../MyOrders/MyOrders";
 //import ManageAllBookings from "../ManageAllBookings/ManageAllBookings";
 //import ManageAllServices from "../ManageAllServices/ManageAllServices";
 
@@ -34,6 +35,11 @@ const Admin = () => {
                 </Button>
               </ListGroup.Item>
               <ListGroup.Item variant="dark" as="li" className="admin-item">
+                <Button variant="success" onClick={() => setRender("myOrders")}>
+                  View Your Orders
+                </Button>
+              </ListGroup.Item>
+              <ListGroup.Item variant="dark" as="li" className="admin-item">
                 <Button
                   variant="success"
                   onClick={() => setRender("manageProducts")}
@@ -45,7 +51,8 @@ const Admin = () => {
           </Container>
         </Col>
         <Col lg={9} md={9} sm={12}>
-          {render === "addServices" && <AddServices></AddServices>}
+          {render === "addProducts" && <AddProducts></AddProducts>}
+          {render === "myOrders" && <MyOrders></MyOrders>}
           {/* {render === "manageServices" && (
             <ManageAllServices></ManageAllServices>
           )} */}
