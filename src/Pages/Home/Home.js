@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import useProducts from "../../Hooks/useProducts";
 import Product from "../Product/Product";
 import Banner from "../Banner/Banner";
+import FAQ from "../FAQ/FAQ";
 
 const Home = () => {
   const [products] = useProducts();
@@ -21,6 +22,7 @@ const Home = () => {
           </div>
         </div>
       </Container>
+      <FAQ></FAQ>
     </div>
   );
 };

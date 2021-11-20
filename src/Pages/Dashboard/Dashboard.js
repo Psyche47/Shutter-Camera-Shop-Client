@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Col, Container, ListGroup, Row } from "react-bootstrap";
 import AddProducts from "../AddProducts/AddProducts";
 import ManageAllOrders from "../ManageAllOrders/ManageAllOrders";
@@ -6,6 +6,7 @@ import MyOrders from "../MyOrders/MyOrders";
 import ManageAllProducts from "../ManageAllProducts/ManageAllProducts";
 import Pay from "../Pay/Pay";
 import useAuth from "../../Hooks/useAuth";
+import MakeAdmin from "../MakeAdmin/MakeAdmin";
 
 const Admin = () => {
   const [render, setRender] = useState("addProducts");
@@ -79,6 +80,17 @@ const Admin = () => {
                   </Button>
                 </ListGroup.Item>
               )}
+
+              {admin && (
+                <ListGroup.Item variant="dark" as="li" className="admin-item">
+                  <Button
+                    variant="success"
+                    onClick={() => setRender("makeAdmin")}
+                  >
+                    Make Admin
+                  </Button>
+                </ListGroup.Item>
+              )}
             </ListGroup>
           </Container>
         </Col>
@@ -90,6 +102,7 @@ const Admin = () => {
             <ManageAllProducts></ManageAllProducts>
           )}
           {render === "manageAllOrders" && <ManageAllOrders></ManageAllOrders>}
+          {render === "makeAdmin" && <MakeAdmin></MakeAdmin>}
         </Col>
       </Row>
     </div>

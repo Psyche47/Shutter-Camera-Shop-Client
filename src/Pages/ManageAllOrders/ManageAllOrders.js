@@ -58,7 +58,7 @@ const ManageAllOrders = () => {
       <div>
         <Table striped bordered hover responsive className="caption-top">
           <caption className="text-center h3 bg-dark text-light rounded p-2">
-            Manage All Bookings
+            Manage All Orders
           </caption>
           <thead>
             <tr>
