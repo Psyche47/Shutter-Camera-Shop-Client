@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Button, Col, Container, ListGroup, Row } from "react-bootstrap";
 import AddProducts from "../AddProducts/AddProducts";
+import ManageAllOrders from "../ManageAllOrders/ManageAllOrders";
 import MyOrders from "../MyOrders/MyOrders";
-//import ManageAllBookings from "../ManageAllBookings/ManageAllBookings";
-//import ManageAllServices from "../ManageAllServices/ManageAllServices";
 
 const Admin = () => {
   const [render, setRender] = useState("addProducts");
@@ -42,9 +41,9 @@ const Admin = () => {
               <ListGroup.Item variant="dark" as="li" className="admin-item">
                 <Button
                   variant="success"
-                  onClick={() => setRender("manageProducts")}
+                  onClick={() => setRender("manageAllOrders")}
                 >
-                  Manage All Products
+                  Manage All Orders
                 </Button>
               </ListGroup.Item>
             </ListGroup>
@@ -56,9 +55,7 @@ const Admin = () => {
           {/* {render === "manageServices" && (
             <ManageAllServices></ManageAllServices>
           )} */}
-          {/* {render === "manageBookings" && (
-            <ManageAllBookings></ManageAllBookings>
-          )} */}
+          {render === "manageAllOrders" && <ManageAllOrders></ManageAllOrders>}
         </Col>
       </Row>
     </div>

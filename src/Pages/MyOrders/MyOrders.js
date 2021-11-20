@@ -29,7 +29,7 @@ const MyOrders = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  console.log(user.email);
+
   useEffect(() => {
     fetch(`http://localhost:5000/myOrders/${user.email}`)
       .then((res) => res.json())
